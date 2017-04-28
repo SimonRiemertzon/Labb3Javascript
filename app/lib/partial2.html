@@ -1,0 +1,27 @@
+<div class="inputDiv" ng-controller="partialTwoController">
+
+    <form name="userForm" novalidate>
+        <!--<label for="firstName">First Name</label><br>
+        <input type="text" id="firstName" ng-model="firstName" value="" placeholder="First Name"/><br>
+        <label for="lastName">First Name</label><br>
+        <input type="text" id="lastName" ng-model="lastName" value="" placeholder="Last Name"/><br>
+        <label for="firstName">First Name</label><br> -->
+
+        <label for="firstName">First Name</label><br>
+        <input type="text" id="firstName" ng-model="user.name" value="" placeholder="First Name"/><br>
+
+
+        <label for="userSsnID"></label>
+        <input name="ssnName" id="userSsnID" ng-model="ssnModel" type="text" ng-required="true" placeholder="YYYYMMDD-XXXX"/><br>
+
+
+        <small ng-show="$scope.isInputCorrect(ssn) ">Du har ej angivit ett korrekt personummer</small>
+
+
+        <br>
+        <input id="submitButton" type="submit" value="Submit"/>
+    </form>
+
+
+    Your age: <em id="age"></em>
+</div>

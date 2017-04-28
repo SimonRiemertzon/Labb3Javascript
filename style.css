@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css?family=Bitter');
+
+@font-face {
+    font-family: topFont;
+    src: url(sensations_and_qualities.ttf);
+}
+
+header {
+    background-color: aqua;
+}
+
+
+a {
+    margin: 20px;
+    font-family: 'Bitter', serif;
+}
+
+a:link {
+    color: black;
+    text-decoration: none;
+}
+a:visited {
+    color: #00d5d6;
+    text-decoration: none;
+}
+
+body {
+    background:url(background.png) fixed;
+    font-family: 'Bitter', serif;
+    font-size: medium;
+
+}
+
+small {
+    font-size: x-small;
+    color: darkred;
+}
+
+
+.inputDiv{
+    width: 20%;
+    padding: 10px 5%;
+    border-radius: 10px;
+    border: 2px solid cornsilk;
+    margin: 10px 0;
+    color: black;
+    background-color: mediumaquamarine;
+
+}
+
+main {
+    background-color: #4b3c25;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+
+.headTitle {
+    font-family:topFont;
+    font-size: 30pt;
+
+}
+
+/* Inputfields */
+
+input[type=text], select {
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+
+
+}
+
+input.ng-invalid.ng-touched { border: solid 2px #e60814;}
+
+
+
+
+
