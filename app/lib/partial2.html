@@ -1,6 +1,6 @@
 <div class="inputDiv" ng-controller="partialTwoController">
 
-    <form name="userForm" novalidate>
+    <form name="userForm" novalidate ng-submit="addUser()">
         <!--<label for="firstName">First Name</label><br>
         <input type="text" id="firstName" ng-model="firstName" value="" placeholder="First Name"/><br>
         <label for="lastName">First Name</label><br>
@@ -8,14 +8,22 @@
         <label for="firstName">First Name</label><br> -->
 
         <label for="firstName">First Name</label><br>
-        <input type="text" id="firstName" ng-model="user.name" value="" placeholder="First Name"/><br>
+        <input type="text" id="firstName" ng-model="user.fname"  placeholder="First Name" ng-required="true"/><br>
+        <input type="text" id="lastName" ng-model="user.lname"  placeholder="Last Name" ng-required="true"/><br>
+
+        <label for="SsnID"></label>
+        <input name="userSsn" id="SsnID"  type="text" ng-model="user.ssn" user-ssn ng-required="true" placeholder="YYYYMMDD-XXXX"/><br>
+        <small ng-show="showMyErrorMessage && userForm.userSsn.$touched">{{errorMsg}}</small>
 
 
-        <label for="userSsnID"></label>
-        <input name="ssnName" id="userSsnID" ng-model="ssnModel" type="text" ng-required="true" placeholder="YYYYMMDD-XXXX"/><br>
 
 
-        <small ng-show="$scope.isInputCorrect(ssn) ">Du har ej angivit ett korrekt personummer</small>
+       <!-- ****1*****<ul class="error-msgs" ng-messages="userForm.userSsn.$error">
+            <li ng-message="regexValidator">Du har ej angivit ett korrekt personummer</li>
+        </ul>
+        -->
+
+
 
 
         <br>
@@ -23,5 +31,5 @@
     </form>
 
 
-    Your age: <em id="age"></em>
+    Your age: <em id="age">{{ageMsg}}</em>
 </div>

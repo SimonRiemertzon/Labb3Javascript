@@ -1,17 +1,7 @@
 
 # Created by https://www.gitignore.io/api/macos,bower,angular,webstorm
 
-### Angular ###
-## Angular ##
-# compiled output
-/dist
-/tmp
 
-
-
-# dependencies
-/node_modules
-/bower_components
 
 # IDEs and editors
 /.idea
@@ -31,12 +21,6 @@ testem.log
 
 #System Files
 .DS_Store
-
-### Bower ###
-bower_components
-.bower-cache
-.bower-registry
-.bower-tmp
 
 ### macOS ###
 *.DS_Store
