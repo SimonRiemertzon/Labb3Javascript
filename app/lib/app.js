@@ -1,52 +1,53 @@
 var labbApp = angular.module('labbApp', ['ngRoute', 'ngMessages']);
 
-labbApp.config(function($routeProvider){
-    $routeProvider.when('/partial' , {
-        controller : 'partialController',
-        templateUrl :'app/lib/partial.html'
+labbApp.config(function ($routeProvider) {
+    $routeProvider.when('/partial', {
+        controller: 'partialController',
+        templateUrl: 'app/lib/partial.html'
 
     }).when('/partial2', {
         controller: 'partialTwoController',
-        templateUrl : 'app/lib/partial2.html'
-    })
-
-
+        templateUrl: 'app/lib/partial2.html'
+    });
 
 });
 
+labbApp.run(['$rootScope', function ($rootScope) {
+    $rootScope.yourAge;
+    $rootScope.userYear = 0;
+    $rootScope.userMonth = 0;
+    $rootScope.userDay = 0;
+    $rootScope.date = new Date();
+    $rootScope.currentMonth = (Number($rootScope.date.getMonth() + 1));
+    $rootScope.currentDate = Number($rootScope.date.getDate());
+    $rootScope.currentYear = Number($rootScope.date.getFullYear());
 
+}]);
 
-
-labbApp.controller('partialController', ['$scope', function($scope) {
+labbApp.controller('partialController', ['$scope', function ($scope) {
     $scope.hello = {
-    name: 'Simon'
+        name: 'Simon'
     }
 }]);
 
-labbApp.filter ('simon', function() {
+labbApp.filter('simon', function () {
     return function (input, search) {
-        return input.filter(function (value) { return value.name.startsWith(search); });
+        return input.filter(function (value) {
+            return value.name.startsWith(search);
+        });
     };
 
 });
 
-labbApp.controller('partialTwoController', ['$scope', function ($scope) {
-/*
-    $scope.user ={
-        name: "",
-        ssn : ""
+labbApp.controller('partialTwoController', ['$scope', '$rootScope', function ($scope, $rootScope) {
 
-    };
-
- */
+    $scope.$watch('user.ssn', isInputCorrect);
 
     function isInputCorrect(newValue) {
-        console.log("Nu körs isInputCorrect " + newValue );
         if (/\d{8}-\d{4}$/.test(newValue)) {
-            console.log(newValue);
             if (isSsnValid(newValue)) {
                 $scope.showMyErrorMessage = false;
-
+                //Ssn, is now valid
             } else {
                 $scope.errorMsg = "Your control number isn't valid";
                 $scope.showMyErrorMessage = true;
@@ -60,72 +61,9 @@ labbApp.controller('partialTwoController', ['$scope', function ($scope) {
 
     };
 
-
-    $scope.$watch('userSsn', isInputCorrect);
-
-/*
-****1****
-    labbApp.directive('userSsn', function() {
-    return {
-        restrict: 'A',
-
-        require: 'ngModel',
-
-        link: function (scope, element, attr, ctrl) {
-            function customValidator(ngModelValue) {
-                if (/\d{8}-\d{4}$/.test(ngModelValue)) {
-                    console.log(ngModelValue);
-                    ctrl.$setValidity('regexValidator', true);
-
-                    if (isSsnValid(ngModelValue)) {
-                        ctrl.$setValidity('securityNumberValidator', true);
-
-                    } else {
-                        $scope.errorMsg = "Kontrollsiffran är fel";
-                        ctrl.$setValidity('securityNumberValidator', false);
-                    }
-                } else {
-                    $scope.errorMsg = "Du angav ej ett korrekt personnummer. Försök igen!";
-                    ctrl.$setValidity('regexValidator', false);
-
-
-                }
-
-                return ngModelValue;
-            }
-            ctrl.$parsers.push(customValidator);
-        }
-    };
-});
-
-/*
-    $scope.isInputCorrect = function isInputCorrect(ssn) {
-        if (/\d{8}-\d{4}$/.test(ssn)) {
-            console.log(ssn);
-            if (isSsnValid(ssn)) {
-
-            } else {
-                $scope.errorMsg = "Kontrollsiffran är fel";
-
-            }
-        } else {
-            $scope.errorMsg = "Du angav ej ett korrekt personnummer. Försök igen!";
-
-
-
-        }
-    };
-
-
-*/
-
-
-
-
     function isSsnValid(ssn) {
         var ssnOnlyNumbers = ssn.replace('-', '');
         var sum = 0;
-
 
         for (var i = 2; i < ssnOnlyNumbers.length - 1; i++) {
             if (i % 2 === 0) {
@@ -144,30 +82,33 @@ labbApp.controller('partialTwoController', ['$scope', function ($scope) {
         return (securityNumber == ssn.charAt(12));
     };
 
-
     $scope.calculateAge = function calculateAge(ssn) {
-        sliceUpSsn(ssn, true);
-        yourAge = currentYear - userYear;
 
-        if (currentMonth < userMonth) {
-            yourAge--;
+        if (ssn != undefined) {
+            $scope.sliceUpSsn(ssn);
+            $rootScope.yourAge = $rootScope.currentYear - $rootScope.userYear;
 
-        } else if (currentMonth == userMonth && currentDate > userDay) {
-            yourAge--;
+            if ($rootScope.currentMonth < $rootScope.userMonth) {
+                $rootScope.yourAge--;
+
+            } else if ($rootScope.currentMonth == $rootScope.userMonth && $rootScope.currentDate > $rootScope.userDay) {
+                $rootScope.yourAge--;
+            }
+            return $rootScope.yourAge;
         }
-        return yourAge;
+
     };
 
-
     $scope.sliceUpSsn = function sliceUpSsn(ssn) {
+        $rootScope.userYear = Number(ssn.slice(0, 4));
+        $rootScope.userMonth = Number(ssn.slice(4, 6));
+        $rootScope.userDay = Number(ssn.slice(6, 8));
 
-        userYear = Number(ssn.slice(0, 4));
-        userMonth = Number(ssn.slice(4, 6));
-        userDay = Number(ssn.slice(6, 8));
+    };
 
+    $scope.showUserData = function showUserData() {
+        $scope.showUser = true;
     }
-
-
 
 }]);
 

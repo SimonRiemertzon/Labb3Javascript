@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Bitter');
+@import url('https://fonts.gstatic.com/s/bitter/v10/HEpP8tJXlWaYHimsnXgfCOvvDin1pK8aKteLpeZ5c0A.woff2');
 
 @font-face {
     font-family: topFont;
@@ -12,7 +12,7 @@ header {
 
 a {
     margin: 20px;
-    font-family: 'Bitter', serif;
+
 }
 
 a:link {
@@ -48,7 +48,18 @@ small {
 
 }
 
-main {
+.userDataAside{
+    position: right;
+    width: 20%;
+    padding: 10px 5%;
+    border-radius: 10px;
+    border: 2px solid cornsilk;
+    margin: 10px 0;
+    color: black;
+    background-color: mediumaquamarine;
+}
+
+nav {
     background-color: #4b3c25;
     width: 100%;
     position: absolute;
